@@ -28,5 +28,19 @@ namespace WeatherNow.API.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+
+        [HttpGet("forecast/{city}")]
+        public async Task<IActionResult> GetForecast(string city)
+        {
+            try
+            {
+                var result = await _weatherService.GetForecastAsync(city);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
     }
 }
